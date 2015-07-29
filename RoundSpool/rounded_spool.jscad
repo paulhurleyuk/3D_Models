@@ -3,10 +3,10 @@
 
 //	Spool for DrawBot stepper motor
 //	Settings
-sp = 0.1;		//	Spacing/Clearance
-cl = 0.2;		//	Spacing/Clearance
-th = 1;		//	Part thickness
-fn = 64;		//	Facets
+sp = 0.1;	//	Spacing/Clearance
+cl = 0.2;	//	Spacing/Clearance
+th = 1.0;	//	Part thickness
+fn = 64;	//	Facets
 
 //	Motor shaft dimensions
 msl = 16;	//	Shaft length
@@ -15,32 +15,33 @@ msr = msd/2;	//	Shaft radius
 msf = 0.5+cl/2;		//	Flatside depth of shaft
 
 //	Spool dimensions
-srimd = 40;		//	Spool rim diameter
+srimd = 40;	//	Spool rim diameter
 srr = srimd/2;	//	Spool rim radius
-srth = 3;		//	Spool rim thickness
-srh= 3;         // spool rim height
-sbh= 3;         // spool bottom rim height
+srth = 3;	//	Spool rim thickness
+srh= 3;         //	spool rim height
+sbh= 3;         // 	spool bottom rim height
 
-ssd = 30;		//	Spool shaft diameter
-ssr = ssd/2;		//	Spool shaft radius
-ssh = 8;        // spool shaft height
-sbch = 4;		//	Spool bottom cube height
-sbcw = 8;		//	Spool bottom cube width
-ssnw = 1;		//	Spool shaft notch width
-ssnh = 1;		//	Spool shaft notch height
+ssd = 40;	//	Spool shaft diameter
+ssr = ssd/2;	//	Spool shaft radius
+ssh = 10;        // spool shaft height
+sbch = 4;	//	Spool bottom cube height
+sbcw = 8;	//	Spool bottom cube width
+ssnw = 1;	//	Spool shaft notch width
+ssnh = 1;	//	Spool shaft notch height
 ssnl = srimd+2;	//	Spool shaft notch length
-sh = srh+ssh+sbh;		//	Spool height
+sh = srh+ssh+sbh;	//	Spool height
+sa = 60;	//	Spool Shaft /rim angle
 
-// M3 dimensions
-m3w = 2.4; // width of M3 nut
-m3af = 5.5; // A/F M3 nut
-m3ac=6.4; //M3 accross corners
-m3d= 3; //M3 bolt diameter
+// bolt dimensions
+m3w = 2.4+cl*2;	 // 	width ofnut nut
+m3af = 5.5;	 //	A/F nut
+m3ac=6.4+cl*2;	 //	accross corners
+m3d= 3+cl;	 //	bolt diameter
 m3depth=10;
 
 //	Display
-offset = 15;		//	Offset from one another
-o = 4;		//
+offset = 15;	//	Offset from one another
+o = 4;		//	o=??
 
 
 function main() {
@@ -53,7 +54,7 @@ function main() {
 	translate([0,0,sbh],
 	    cylinder({r: ssr,h: ssh, fn: fn})),
 	translate([0,0,sbh+(ssh/2)],
-	    torus({ ri:ssh/2,ro: ssr, fni:fn, fno:fn, roti:45 })
+	    torus({ ri:(ssh/2)/sin(sa),ro:ssr+((ssh/2)/tan(sa)), fni:fn, fno:fn, roti:45 })
 	)
 	),
 	translate([0,0,sbh+ssh],
