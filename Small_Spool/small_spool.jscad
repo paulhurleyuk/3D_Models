@@ -79,7 +79,7 @@ function main() {
 		),
 		translate([0,0,sbh+(ssh/2)],
 		rotate([0,-90,0],
-		cylinder({r: m3d/2,h: srr*2, fn: fn})
+		cylinder({r: m3d/2+sp,h: srr*2, fn: fn})
 		))),
 		cylinder({r1:msr+sp,r2:0,h:5,fn:fn}))
 	];
